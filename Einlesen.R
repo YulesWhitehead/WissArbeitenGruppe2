@@ -1,4 +1,7 @@
+## Ließt die Datei unverarbeitet ein
+
 read.csv("titanic.csv")
+
 ## Eine Funktion zum extrahieren der Anreden
 
 anrede <- function(x) {
@@ -11,7 +14,9 @@ anrede <- function(x) {
   }
   return(an)
 }
+
 # Anwendung auf die Daten und erstellung eines neuen Vektors für die Anreden
+
 data$Anrede <- anrede(data$Name)
 
 ## Extrahieren der einzigartigen Anreden
@@ -23,6 +28,7 @@ unique(data$Anrede)
 # [16] "the Countess" "Jonkheer" 
 
 ## Zusammenfassen gleichbedeutender Anreden
+
 comp <- function(x) {
   for (i in 1:length(x)) {
     if (x[i] == "Miss") {
@@ -42,6 +48,7 @@ comp <- function(x) {
 }
 
 data$Anrede <- comp(data$Anrede)
+
 ## Die anderen Anreden sind inhaltlich nicht exakt gleich und es ist zu
 ## erwarten das die betroffenen Personen sich jeweils in wichtigen 
 ## Attributen unterscheide (Durchschnittsalter, etc)
@@ -57,3 +64,8 @@ data$Sex <- factor(data$Sex, c("male", "female"), c("Male", "Female"))
 ## Faktorisierung von "Embarked"
 
 data$Embarked <- factor(data$Embarked, c("C", "Q", "S"), c("Cherbourg", "Queenstown", "Southampton"))
+
+## Faktorisierung von "Pclass" (als ordered Faktor)
+
+data$Pclass <- ordered(data$Pclass, 3:1)
+
