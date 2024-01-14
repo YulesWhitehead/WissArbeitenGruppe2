@@ -11,3 +11,5 @@ anrede <- function(x) {
   }
   return(an)
 }
+# Anwendung auf die Daten und erstellung eines neuen Vektors für die Anreden
+data$Anrede <- anrede(data$Name)
