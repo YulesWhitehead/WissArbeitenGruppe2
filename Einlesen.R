@@ -69,3 +69,29 @@ data$Embarked <- factor(data$Embarked, c("C", "Q", "S"), c("Cherbourg", "Queenst
 
 data$Pclass <- ordered(data$Pclass, 3:1)
 
+## Funktion zum imputieren der fehlenden Werte
+
+imp <- function(x, anrede) {
+  un <- unique(anrede)
+  n <- length(un)
+  m <- vector("numeric", n)
+  
+  for (i in 1:n) {
+    m[i] <- mean(x[anrede == un[i]], na.rm = TRUE)
+  }
+  
+  l <- length(x)
+  
+  for (i in 1:l) {
+    if (is.na(x[i])) {
+      temp <- match(anrede[i], un)
+      x[i] <- m[temp]
+    }
+  }
+  
+  return(x)
+}
+
+## Anwenden der Funktion
+
+data$Age <- imp(data$Age, data$Anrede)
