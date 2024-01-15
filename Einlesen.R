@@ -95,3 +95,46 @@ imp <- function(x, anrede) {
 ## Anwenden der Funktion
 
 data$Age <- imp(data$Age, data$Anrede)
+
+## Funktion zum extrahieren der relevanten Daten aus dem Cabin Vektor
+
+extract <- function(x) {
+  n <- length(x)
+  side <- vector("character", n)
+  deck <- vector("character", n)
+  
+  for (i in 1:n) {
+    if (x[i] == "") {
+      x[i] <- NA
+      side[i] <- NA
+      deck[i] <- NA
+    }
+    else if (!grepl(" ", x[i])){
+      deck[i] <- substring(x[i], 1, 1)
+      side[i] <- ifelse((as.numeric(substring(x[i], 2)) %% 2) == 0, "Backboard", "Starboard")
+    }
+    else {
+      temp <- strsplit(x[i], " ")[[1]]
+      tempn <- length(temp)
+      tempd <- vector("character", tempn)
+      temps <- vector("character", tempn)
+      for (j in 1:tempn) {
+        tempd[j] <- substring(temp[j], 1, 1)
+        temps[j] <- ifelse((as.numeric(substring(temp[j], 2)) %% 2) == 0, "Backboard", "Starboard")
+      }
+      side[i] <- paste(temps, collapse = " ")
+      deck[i] <- paste(tempd, collapse = " ")
+    }
+  }
+  
+  return(data.frame(Side = side, Deck = deck))
+}
+
+## Anwendung der Funktion
+
+temp <- extract(data$Cabin)
+
+data$Side <- temp$Side
+data$Deck <- temp$Deck
+
+rm(temp)
