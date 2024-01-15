@@ -148,6 +148,7 @@ for (col in remove) {
 }
 
 rm(remove)
+rm(col)
 
 ## Speichern der Daten zum späteren bemutzen
 
