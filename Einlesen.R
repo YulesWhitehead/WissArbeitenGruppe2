@@ -1,6 +1,6 @@
 ## Ließt die Datei unverarbeitet ein
 
-read.csv("titanic.csv")
+data <- read.csv("titanic.csv")
 
 ## Eine Funktion zum extrahieren der Anreden
 
@@ -138,3 +138,17 @@ data$Side <- temp$Side
 data$Deck <- temp$Deck
 
 rm(temp)
+
+## Entfernen der nicht mehr benötigten Variablen
+
+remove <- c("PassengerID", "Name", "Ticket", "Cabin")
+
+for (col in remove) {
+  data[[col]] <- NULL
+}
+
+rm(remove)
+
+## Speichern der Daten zum späteren bemutzen
+
+save(data, file = "titanic.RData")
