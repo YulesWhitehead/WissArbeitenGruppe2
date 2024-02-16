@@ -1,7 +1,20 @@
+# Laden der benötigten Pakete
 library(psych)
 library(e1071)
 
+#a-i
+
+# metr_stat - Funktion zur Berechnung deskriptiver Statistiken fuer metrische
+#             Variablen
+# 
+# Eingabe: 
+# data      - Datensatz, fuer den die Statistiken berechnet werden sollen
+#
+# Ausgabe:
+# result    - Ergebnismatrix als Dataframe mit allen berechneten Statistiken
+
 metr_stat <- function(data) {
+  # Erstellen einer leeren Ergebnismatrix
   result <- matrix(NA, nrow = length(data), ncol = 15)
   colnames(result) <- c("Variable", "Anzahl", "Minimum", "Maximum", "Spannweite",
                         "Median", "Erste Quartil", "Letzte Quartil", 
@@ -9,6 +22,7 @@ metr_stat <- function(data) {
                         "Varianz", "Standardabw.", "Variationskoef.",
                         "Schiefe", "Kurtosis")
   
+  # Iteration ueber die Variablen im Datensatz
   for(i in 1:length(data)) {
     var_name <- names(data)[i]  
     var_data <- data[[i]]
@@ -19,6 +33,7 @@ metr_stat <- function(data) {
     q1 <- quantile(var_data, 0.25, na.rm = TRUE)
     q2 <- quantile(var_data, 0.75, na.rm = TRUE)
     
+    # Speichern der berechneten Statistiken in die Ergebnismatrix
     result[i, 1] <- var_name
     result[i, 2] <- length(var_data)
     result[i, 3] <- Min
@@ -36,26 +51,45 @@ metr_stat <- function(data) {
     result[i, 15] <- kurtosis(var_data)
   }
   
+  # Rueckgabe der Ergebnismatrix als Dataframe
   return(as.data.frame(result))
 }
 
+
+#a-ii
+
+# Die Funktion bestimmt den Modalwert (am haeufigsten vorkommender Wert)
+# einer kategorialen Variable
 moda <- function(v) {
   uniqv <- unique(v)
   uniqv[which.max(tabulate(match(v, uniqv)))]
 }
 
+# metr_stat - Funktion zur Berechnung deskriptiver Statistiken fuer kategoriale
+#             Variablen
+# 
+# Eingabe: 
+# data      - Datensatz, fuer den die Statistiken berechnet werden sollen
+#
+# Ausgabe:
+# result    - Ergebnismatrix als Dataframe mit allen berechneten Statistiken
+
 kateg_stat <- function(data){
+  # Erstellen einer leeren Ergebnismatrix
   result <- matrix(NA, nrow = length(data), ncol = 3)
   colnames(result) <- c("Variable", "Anzahl", "Modalwert")
   
+  # Iteration über die Variablen im Datensatz
   for(i in 1:length(data)) {
     var_name <- names(data)[i]  
     var_data <- data[[i]]
     
+    # Speichern der berechneten Statistiken in die Ergebnismatrix
     result[i, 1] <- var_name
     result[i, 2] <- length(var_data)
     result[i, 3] <- moda(var_data)
   }
   
+  # Rueckgabe der Ergebnismatrix als Dataframe
   return(as.data.frame(result))
 }
