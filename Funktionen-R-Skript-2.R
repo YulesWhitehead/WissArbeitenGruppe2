@@ -1,0 +1,15 @@
+# CramersV - Funktion zur Berechnung von Cramers V
+#
+# Eingabe:  zwei Vektoren mit Auspraegungen von kategorialen Variablen gleicher
+#           Laenge
+#
+# Ausgabe:  Cramers V
+
+CramersV <- function(Merkmal1, Merkmal2){
+  Tabelle <- table(Merkmal1, Merkmal2)
+  m <- min(ncol(Tabelle)-1, nrow(Tabelle)-1)
+  n <- length(Merkmal1)
+  Liste <- chisq.test(Merkmal1, Merkmal2)
+  Chiquadrat <- as.numeric(Liste[1])
+  sqrt(Chiquadrat/(n*m))
+}
