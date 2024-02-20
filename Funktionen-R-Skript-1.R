@@ -93,3 +93,22 @@ kateg_stat <- function(data){
   # Rueckgabe der Ergebnismatrix als Dataframe
   return(as.data.frame(result))
 }
+
+
+#a-iii
+
+# kat_stat -  Funktion zur Berechnung bivariater deskriptiver Statistiken fuer
+#             den Zusammenhang zweier kategorialer Variablen
+# 
+# Eingabe: 
+# data1     - Vektor der Auspraegungen der ersten kategorialen Variable
+# data2     - Vektor der Auspraegungen der zweiten kategorialen Variable
+#
+# Ausgabe:
+# result    - benannter Vektor mit Cramers V und dem normierten
+#             Kontingenzkoeffizienen nach Pearson
+
+
+kat_stat <- function(data1, data2) {
+  c(Cramer = CramersV(data1, data2), normKont = normKontingenz(data1, data2))
+}
