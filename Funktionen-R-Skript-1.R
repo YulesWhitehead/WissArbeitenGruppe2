@@ -1,4 +1,4 @@
-# Laden der benötigten Pakete
+# Laden der benoetigten Pakete
 library(psych)
 library(e1071)
 
@@ -57,13 +57,6 @@ metr_stat <- function(data) {
 
 
 #a-ii
-
-# Die Funktion bestimmt den Modalwert (am haeufigsten vorkommender Wert)
-# einer kategorialen Variable
-moda <- function(v) {
-  uniqv <- unique(v)
-  uniqv[which.max(tabulate(match(v, uniqv)))]
-}
 
 # metr_stat - Funktion zur Berechnung deskriptiver Statistiken fuer kategoriale
 #             Variablen
