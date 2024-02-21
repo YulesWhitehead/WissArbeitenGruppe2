@@ -1,3 +1,16 @@
+# moda - Funktion zur Bestimmung des Modalwerts 
+#        (am haeufigsten vorkommender Wert)
+#
+# Eingabe: 
+# v    - eine kategoriale Variable
+#
+# Ausgabe: Modalwert
+
+moda <- function(v) {
+  uniqv <- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+
 # CramersV - Funktion zur Berechnung von Cramers V
 #
 # Eingabe:  zwei Vektoren mit Auspraegungen von kategorialen Variablen gleicher
