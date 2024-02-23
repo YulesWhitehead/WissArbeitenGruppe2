@@ -96,6 +96,14 @@ imp <- function(x, anrede) {
 
 data$Age <- imp(data$Age, data$Anrede)
 
+## Bearbeitung des Cabin-Vektors
+data$Cabin[129] <- "E69"
+data$Cabin[700] <- "G73"
+data$Cabin[716] <- "G73"
+data$Cabin[743] <- ""
+data$Cabin[312] <- ""
+
+
 ## Funktion zum extrahieren der relevanten Daten aus dem Cabin Vektor
 
 extract <- function(x) {
@@ -113,22 +121,16 @@ extract <- function(x) {
       deck[i] <- substring(x[i], 1, 1)
       side[i] <- ifelse((as.numeric(substring(x[i], 2)) %% 2) == 0, "Backboard", "Starboard")
     }
+    
     else {
-      temp <- strsplit(x[i], " ")[[1]]
-      tempn <- length(temp)
-      tempd <- vector("character", tempn)
-      temps <- vector("character", tempn)
-      for (j in 1:tempn) {
-        tempd[j] <- substring(temp[j], 1, 1)
-        temps[j] <- ifelse((as.numeric(substring(temp[j], 2)) %% 2) == 0, "Backboard", "Starboard")
-      }
-      side[i] <- paste(temps, collapse = " ")
-      deck[i] <- paste(tempd, collapse = " ")
+      x[i] <- strsplit(x[i], " ")[[1]][1]
+      deck[i] <- substring(x[i], 1, 1)
+      side[i] <- ifelse((as.numeric(substring(x[i], 2)) %% 2) == 0, "Backboard", "Starboard")
     }
   }
-  
   return(data.frame(Side = side, Deck = deck))
 }
+
 
 ## Anwendung der Funktion
 
@@ -140,8 +142,9 @@ data$Deck <- temp$Deck
 rm(temp)
 
 ## Faktorisierung von "Side" und "Deck"
-data$Side <- factor(data$Side, 0:1, c("Backboard", "Starboard"))
-data$Deck <- factor(data$Deck, 0:6, c("A", "B", "C", "D", "E", "F", "G"))
+data$Side <- as.factor(data$Side)
+data$Deck <- as.factor(data$Deck)
+
 
 ## Entfernen der nicht mehr benötigten Variablen
 
