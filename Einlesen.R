@@ -139,6 +139,10 @@ data$Deck <- temp$Deck
 
 rm(temp)
 
+## Faktorisierung von "Side" und "Deck"
+data$Side <- factor(data$Side, 0:1, c("Backboard", "Starboard"))
+data$Deck <- factor(data$Deck, 0:6, c("A", "B", "C", "D", "E", "F", "G"))
+
 ## Entfernen der nicht mehr benötigten Variablen
 
 remove <- c("PassengerID", "Name", "Ticket", "Cabin")
