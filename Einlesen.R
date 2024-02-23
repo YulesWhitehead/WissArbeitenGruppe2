@@ -150,6 +150,7 @@ for (col in remove) {
 rm(remove)
 rm(col)
 
-## Speichern der Daten zum späteren bemutzen
+## Speichern der Daten zum späteren benutzen
 
 save(data, file = "titanic.RData")
+
