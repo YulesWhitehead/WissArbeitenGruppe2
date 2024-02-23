@@ -45,3 +45,30 @@ normKontingenz <- function(Merkmal1, Merkmal2){
   Korrektur <- sqrt((m-1)/m)
   Kontingenz/Korrektur
 }
+# a-iv
+
+# Helfer-Funktion zur Überprüfung und Vorbereitung der Daten
+prepareDataForAnalysis <- function(metricVar, dichotomousVar) {
+  
+  # Überprüfung, ob die metrische Variable numerisch ist
+  if (!is.numeric(metricVar)) {
+    stop("Die metrische Variable muss numerisch sein.")
+  }
+  
+  # Überprüfung, ob die dichotome Variable genau zwei einzigartige Werte enthält
+  
+  uniqueValues <- unique(dichotomousVar)
+  if (length(uniqueValues) != 2) {
+    stop("Die dichotome Variable muss genau zwei einzigartige Werte enthalten.")
+  }
+  
+  # Umwandlung der dichotomen Variable in einen Faktor, falls noch nicht geschehen
+  
+  if (!is.factor(dichotomousVar)) {
+    dichotomousVar <- factor(dichotomousVar)
+  }
+  
+  # Rückgabe der vorbereiteten Daten
+  
+  list(metricVar = metricVar, dichotomousVar = dichotomousVar)
+}

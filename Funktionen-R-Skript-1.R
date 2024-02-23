@@ -115,3 +115,33 @@ kateg_stat <- function(data){
 kat_stat <- function(data1, data2) {
   c(Cramer = CramersV(data1, data2), normKont = normKontingenz(data1, data2))
 }
+
+#a-iv
+
+# Funktion zur Analyse des Zusammenhangs zwischen einer metrischen und einer 
+#dichotomen Variable 
+analyzeMetricDichotomous <- function(metricVar, dichotomousVar) {
+  
+  # Vorbereitung der Daten mit der Helfer-Funktion
+  preparedData <- prepareDataForAnalysis(metricVar, dichotomousVar)
+  metricVar <- preparedData$metricVar
+  dichotomousVar <- preparedData$dichotomousVar
+  
+  # Berechnung der Mittelwerte für jede Gruppe der dichotomen Variable
+  means <- tapply(metricVar, dichotomousVar, mean, na.rm = TRUE)
+  
+  # Durchführung eines t-Tests
+  t.testResult <- t.test(metricVar ~ dichotomousVar)
+  
+  # Berechnung der Standardabweichungen für jede Gruppe
+  sds <- tapply(metricVar, dichotomousVar, sd, na.rm = TRUE)
+  
+  # Ausgabe der Ergebnisse
+  list(
+    Means = means,
+    StandardDeviations = sds,
+    TTest = t.testResult
+  )
+}
+
+
