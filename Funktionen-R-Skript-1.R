@@ -144,4 +144,25 @@ analyzeMetricDichotomous <- function(metricVar, dichotomousVar) {
   )
 }
 
+# a-v
 
+# Diese Funktion visualisiert alle kategoriellen Variablen eines gegebenen 
+# Dataframes
+
+create_categorical_plot <- function(dataframe) {
+  
+  par(mfrow = c(2,2))
+  
+  n <- length(dataframe[,1])
+  categorical_vars <- sapply(dataframe, is.factor)
+  
+  # Plot für jede kategoriale Variable erstellen
+  for (col in names(dataframe)[categorical_vars]) {
+    cat_levels <- levels(dataframe[[col]])
+    cat_counts <- table(dataframe[[col]])/n
+    
+    # Balkendiagramm erstellen
+    barplot(cat_counts, main = paste("Barplot for", col),
+            xlab = col, ylab = "Frequency", col = rainbow(length(cat_levels)))
+  }
+}
