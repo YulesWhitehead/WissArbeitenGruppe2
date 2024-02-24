@@ -144,17 +144,20 @@ analyzeMetricDichotomous <- function(metricVar, dichotomousVar) {
   )
 }
 
-# a-v
+#
 
-# Diese Funktion visualisiert alle kategoriellen Variablen eines gegebenen 
-# Dataframes
+#* Diese Funktion visualisiert alle kategoriellen Variablen eines gegebenen 
+#* Dataframes.
+#* "dataframe" enthält den Dataframe in welchem die Daten gespeichert sind,
+#* "a" und "b" geben an die viele Plots pro Reihe/Spalte am Ende angezeigt
+#* werden sollen. Um alle Plots einzeln zu bekommen beide auf 1 setzen.
 
-create_categorical_plot <- function(dataframe) {
-  
-  par(mfrow = c(2,2))
+create_categorical_plot <- function(dataframe, a = 1, b = 1) {
   
   n <- length(dataframe[,1])
   categorical_vars <- sapply(dataframe, is.factor)
+  
+  par(mfrow = c(a, b))
   
   # Plot für jede kategoriale Variable erstellen
   for (col in names(dataframe)[categorical_vars]) {
