@@ -41,24 +41,6 @@ zusammenhang_Survived_Parch <- analyzeMetricDichotomous(data$Parch, data$Survive
 # p-Wert des t-Tests liegt bei p-value = 0.01339
 
 
-# Erstellen eines Indikators für obere vs. untere Decks
-data$DeckNumeric <- as.integer(factor(data$Deck, levels = c("A", "B", "C", "D", "E", "F", "G")))
-data$DeckIndicator <- ifelse(data$DeckNumeric <= 3, 1, 0)
-# Analyse des Zusammenhangs zwischen Deck und Ticketpreis hinsichtlich der Überlebensrate
-zusammenhang_Deck_Fare <- analyzeMetricDichotomous(data$Fare, data$DeckIndicator)
-print(zusammenhang_Deck_Fare)
-
-
 # a-v Visualisierung
 create_categorical_plot(data_kategorial, a = 1, b = 3)
 
-
-# Visualisierung des Zusammenhangs zwischen der Anzahl der Geschwister/Partner und der Überlebensrate
-# Für diese Analyse wird ein Balkendiagramm für die Anzahl der Geschwister/Partner (SibSp) erstellen, um zu sehen, wie diese die Überlebensrate beeinflusst.
-
-sibsp_survival_rate <- aggregate(Survived ~ SibSp, data, mean)
-
-barplot(sibsp_survival_rate$Survived, names.arg = sibsp_survival_rate$SibSp,
-        xlab = "Anzahl der Geschwister/Partner (SibSp)", ylab = "Überlebensrate",
-        main = "Überlebensrate nach Anzahl der Geschwister/Partner",
-        col = "blue")
