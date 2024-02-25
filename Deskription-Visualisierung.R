@@ -43,7 +43,6 @@ zusammenhang_Survived_Parch <- analyzeMetricDichotomous(data$Parch, data$Survive
 
 # a-v Visualisierung
 
-
 #Der Balkendiagramm zeigt die Häufigkeiten, mit denen Passagiere an verschiedenen Orten an Bord gegangen sind.
 #Ein überwältigender Anteil der Passagiere ist in Southampton an Bord gegangen (ungefähr 70%), 
 # gefolgt von einer deutlich kleineren Anzahl in Cherbourg, etwa 20%, und noch weniger aus Queenstown (circa 10%).
