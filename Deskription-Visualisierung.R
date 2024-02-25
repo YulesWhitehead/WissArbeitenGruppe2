@@ -47,16 +47,22 @@ zusammenhang_Survived_Anrede <- kat_stat(Survived, Anrede)
 # a-iv Zusammenhang zwischen einer metrischen und einer dichotomen Variable
 zusammenhang_Survived_Age <- analyzeMetricDichotomous(Age, Survived)
 # p-Wert des t-Tests liegt bei 0,009279
+# Die Annahme der Unabhängigkeit der Variablen Age und Survived kann daher bei einem alpha
+# von 0,05 (mit Bonferroni-Adjustierung 0,0125) abgelehnt werden.
 
 zusammenhang_Survived_Fare <- analyzeMetricDichotomous(Fare, Survived)
 # p-Wert des t-Tests liegt bei p-value = 2.699e-11
+# Die Annahme der Unabhängigkeit der Variablen Fare und Survived kann daher bei einem alpha
+# von 0,05 (mit Bonferroni-Adjustierung 0,0125) abgelehnt werden.
 
 zusammenhang_Survived_SibSp <- analyzeMetricDichotomous(SibSp, Survived)
 # p-Wert des t-Tests liegt bei p-value = 0.2327
+# Die Annahme der Unabhängigkeit der Variablen SibSp und Survived kann nicht abgelehnt werden.
 
 zusammenhang_Survived_Parch <- analyzeMetricDichotomous(Parch, Survived)
 # p-Wert des t-Tests liegt bei p-value = 0.01339
-
+# Die Annahme der Unabhängigkeit der Variablen Parch und Survived kann nicht abgelehnt werden,
+# wenn ein alpha von 0,05 und eine Bonferroni-Adjustierung angewendet werden.
 
 # a-v Visualisierung
 
